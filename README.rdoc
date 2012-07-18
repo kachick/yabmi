@@ -1,0 +1,33 @@
+= yabmi
+
+code :: https://github.com/kachick/bmi
+bugs :: https://github.com/kachick/bmi/issue
+
+== Description
+
+Yet another BMI library.
+
+== Usage
+
+    require 'yabmi'
+
+    BMI::USA.calc    50, 1.6   #=> #<BMI::WHO: 19.5(normal)>
+    BMI::USA.calc   100, 1.6   #=> #<BMI::WHO: 39.1(very_obese)>
+    BMI::Japan.calc  50, 1.6   #=> #<BMI::JASSO: 19.5(normal)>
+    BMI::Japan.calc 100, 1.6   #=> #<BMI::JASSO: 39.1(obese3)>
+
+== Requirements
+
+Ruby 1.9.2 or later
+
+== Installation
+
+gem install yabmi
+
+== License
+
+The MIT X11 License
+
+Copyright (c) 2012 Kenichi Kamiya
+
+See the file LICENSE for further details.
