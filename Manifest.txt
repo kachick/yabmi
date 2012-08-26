@@ -1,12 +1,14 @@
-README.rdoc
+README.md
 LICENSE
-History.rdoc
+History.md
 Manifest.txt
 Rakefile
+Gemfile
+yabmi.gemspec
 lib/yabmi.rb
 lib/bmi.rb
 lib/bmi/commonrisk.rb
 lib/bmi/who.rb
 lib/bmi/jasso.rb
-declared/from_readme.rb
+test/test_README.rb
 examples/README.rb
