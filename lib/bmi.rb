@@ -52,12 +52,12 @@ class BMI
   end
   
   def eql?(other)
-    other.bmi? && (other._index == _index)
+    other.respond_to?(:bmi?) && other.bmi? && (other._index == _index)
   end
   
   # @return [Boolean]
   def ==(other)
-    other.bmi? && (other.index == index)
+    other.respond_to?(:bmi?) && other.bmi? && (other.index == index)
   end
   
   alias_method :===, :==
