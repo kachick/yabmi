@@ -9,4 +9,4 @@ lib/bmi/commonrisk.rb
 lib/bmi/who.rb
 lib/bmi/jasso.rb
 declared/from_readme.rb
-example/from_readme.rb
+examples/README.rb
