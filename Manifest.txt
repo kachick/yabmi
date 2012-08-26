@@ -6,6 +6,7 @@ Rakefile
 Gemfile
 yabmi.gemspec
 lib/yabmi.rb
+lib/yabmi/version.rb
 lib/bmi.rb
 lib/bmi/commonrisk.rb
 lib/bmi/who.rb

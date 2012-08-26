@@ -1,6 +1,8 @@
 yabmi
 =====
 
+[![Build Status](https://secure.travis-ci.org/kachick/bmi.png)](http://travis-ci.org/kachick/bmi)
+
 Description
 -----------
 
@@ -29,9 +31,7 @@ BMI::Japan.calc 100, 1.6   #=> #<BMI::JASSO: 39.1(obese3)>
 Requirements
 ------------
 
-* Ruby 1.9.2 or later
-
-  MRI/YARV, Rubinius, JRuby: http://travis-ci.org/#!/kachick/yabmi
+* Ruby 1.9.2 or later [MRI/YARV, Rubinius, JRuby](http://travis-ci.org/#!/kachick/bmi)
 
 Install
 -------
@@ -43,9 +43,9 @@ $ gem install yabmi
 Link
 ----
 
-* code: https://github.com/kachick/yabmi
-* issues: https://github.com/kachick/yabmi/issues
-* CI: http://travis-ci.org/#!/kachick/yabmi
+* code: https://github.com/kachick/bmi
+* issues: https://github.com/kachick/bmi/issues
+* CI: http://travis-ci.org/#!/kachick/bmi
 * gem: https://rubygems.org/gems/yabmi
 * gem+: http://metagem.info/gems/yabmi
 
