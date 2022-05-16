@@ -1,29 +1,29 @@
+# frozen_string_literal: true
+
 require_relative 'commonrisk'
 
 class BMI
-
   class JASSO < self
-  
     include CommonRisk
-  
+
     def obese1?
-      (25...30).cover? @index
+      (25...30).cover?(@index)
     end
 
     def obese2?
-      (30...35).cover? @index
+      (30...35).cover?(@index)
     end
-    
+
     def obese3?
-      (35...40).cover? @index
+      (35...40).cover?(@index)
     end
 
     def obese4?
       @index >= 40
     end
-  
+
     private
-    
+
     def _risks
       [
         :obese4,
@@ -34,7 +34,5 @@ class BMI
         :underweight
       ]
     end
-    
   end
-
 end
