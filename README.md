@@ -1,21 +1,15 @@
 yabmi
 =====
 
-[![Build Status](https://secure.travis-ci.org/kachick/bmi.png)](http://travis-ci.org/kachick/bmi)
+[![Build Status](https://github.com/kachick/yabmi/actions/workflows/test_behaviors.yml/badge.svg?branch=main)](https://github.com/kachick/yabmi/actions/workflows/test_behaviors.yml/?branch=main)
+[![Gem Version](https://badge.fury.io/rb/yabmi.svg)](https://badge.fury.io/rb/yabmi)
 
 Description
 -----------
 
 * Yet another BMI library.
 
-Features
---------
-
-* in USA
-* in Japan
-
-Usage
------
+## Usage
 
 ### Overview
 
@@ -28,32 +22,14 @@ BMI::Japan.calc  50, 1.6   #=> #<BMI::JASSO: 19.5(normal)>
 BMI::Japan.calc 100, 1.6   #=> #<BMI::JASSO: 39.1(obese3)>
 ```
 
-Requirements
-------------
+## Links
 
-* Ruby 1.9.2 or later [MRI/YARV, Rubinius, JRuby](http://travis-ci.org/#!/kachick/bmi)
-
-Install
--------
-
-```shell
-$ gem install yabmi
-```
-
-Link
-----
-
-* code: https://github.com/kachick/bmi
-* issues: https://github.com/kachick/bmi/issues
-* CI: http://travis-ci.org/#!/kachick/bmi
-* gem: https://rubygems.org/gems/yabmi
-* gem+: http://metagem.info/gems/yabmi
+* [Repository](https://github.com/kachick/yabmi)
+* [API documents](https://kachick.github.io/yabmi/)
 
 License
 -------
 
 The MIT X License
-
 Copyright (c) 2012 Kenichi Kamiya
-
 See the file LICENSE for further details.
