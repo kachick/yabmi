@@ -1,23 +1,46 @@
-# I don't know why dose occur errors below.
-#  require_relative 'lib/yabmi/version'
-require File.expand_path('../lib/yabmi/version', __FILE__)
+# coding: us-ascii
+# frozen_string_literal: true
+
+lib_name = 'yabmi'
+
+require_relative './lib/yabmi/version'
+repository_url = "https://github.com/kachick/#{lib_name}"
 
 Gem::Specification.new do |gem|
+  gem.summary       = %q{Yet another BMI libraryy}
+  gem.description   = <<-'DESCRIPTION'
+    Yet another BMI library
+  DESCRIPTION
+  gem.homepage      = repository_url
+  gem.license       = 'MIT'
+  gem.name          = lib_name
+  gem.version       = YABMI::VERSION
+
+  gem.metadata = {
+    'documentation_uri'     => 'https://kachick.github.io/yabmi/',
+    'homepage_uri'          => repository_url,
+    'source_code_uri'       => repository_url,
+    'bug_tracker_uri'       => "#{repository_url}/issues",
+    'rubygems_mfa_required' => 'true'
+  }
+
+  gem.required_ruby_version = Gem::Requirement.new('>= 2.7.0')
+
+  # common
+
   gem.authors       = ['Kenichi Kamiya']
   gem.email         = ['kachick1+ruby@gmail.com']
-  gem.summary       = %q{Yet another BMI library}
-  gem.description   = %q{Yet another BMI library}
-  gem.homepage      = 'https://github.com/kachick/bmi'
+  git_managed_files = `git ls-files`.lines.map(&:chomp)
+  might_be_parsing_by_tool_as_dependabot = git_managed_files.empty?
+  base_files = Dir['README*', '*LICENSE*',  'lib/**/*', 'sig/**/*'].uniq
+  files = might_be_parsing_by_tool_as_dependabot ? base_files : (base_files & git_managed_files)
 
-  gem.files         = `git ls-files`.split($\)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features|declare)/})
-  gem.name          = 'yabmi'
+  unless might_be_parsing_by_tool_as_dependabot
+    if files.grep(%r!\A(?:lib|sig)/!).size < 2
+      raise "obvious mistaken in packaging files, looks shortage: #{files.inspect}"
+    end
+  end
+
+  gem.files         = files
   gem.require_paths = ['lib']
-  gem.version       = YABMI::VERSION.dup # dup for https://github.com/rubygems/rubygems/commit/48f1d869510dcd325d6566df7d0147a086905380#-P0
-
-  gem.required_ruby_version = '>=1.9.2'
-  gem.add_development_dependency 'test-declare', '~>0.0.1'
-  gem.add_development_dependency 'yard', '>=0.8.2.1'
 end
-
