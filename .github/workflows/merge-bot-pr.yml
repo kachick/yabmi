@@ -13,7 +13,7 @@ permissions:
 jobs:
   dependabot:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' && github.actor == 'dependabot[bot]' && github.event.check_suite.conclusion == 'success' }}
+    if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'dependabot[bot]' && github.event.check_suite.conclusion == 'success' }}
     steps:
       - name: Dependabot metadata
         id: metadata
@@ -38,7 +38,7 @@ jobs:
   #   Changing in all personal repository is annoy task for me. Even if using terrafform, getting mandatory CI names in each repo is too annoy!
   renovate:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' && github.actor == 'renovate[bot]' && github.event.check_suite.conclusion == 'success' }}
+    if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'renovate[bot]' && github.event.check_suite.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Approve and merge
