@@ -1,6 +1,5 @@
 name: Merge bot PR after CI
-on:
-  status
+on: status
 
 permissions:
   contents: write
