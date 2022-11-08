@@ -1,5 +1,8 @@
 name: Merge bot PR after CI
-on: status
+on:
+  check_suite:
+    type:
+      - 'completed'
 
 permissions:
   contents: write
@@ -16,11 +19,10 @@ jobs:
           echo '2' ${{ github.ref }}
           echo '3' ${{ startsWith(github.ref, 'refs/pull/') }}
           echo '4' ${{ github.actor }}
-          echo '5' ${{ github.event.state }}
-          echo '6' ${{ github.event_name }}
+          echo '5' ${{ github.base_ref }}
   dependabot:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'dependabot[bot]' && github.event.state == 'success' }}
+    if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'dependabot[bot]' && github.event.check_suite.conclusion == 'success' }}
     steps:
       - name: Dependabot metadata
         id: metadata
@@ -45,7 +47,7 @@ jobs:
   #   Changing in all personal repository is annoy task for me. Even if using terrafform, getting mandatory CI names in each repo is too annoy!
   renovate:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'renovate[bot]' && github.event.state == 'success' }}
+    if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'renovate[bot]' && github.event.check_suite.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - name: Approve and merge
