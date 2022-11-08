@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  # checks: read # For private repositories
+  checks: write
   # actions: read # For private repositories
 
 jobs:
