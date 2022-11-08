@@ -11,6 +11,16 @@ permissions:
   # actions: read # For private repositories
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo '1' $GITHUB_REF
+          echo '2' ${{ github.ref }}
+          echo '3' ${{ startsWith(github.ref, 'refs/pull/') }}
+          echo '4' ${{ github.actor }}
+          echo '5' ${{ github.event.check_suite.conclusion }}
+          echo '6' ${{ github.event_name }}
   dependabot:
     runs-on: ubuntu-latest
     if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'dependabot[bot]' && github.event.check_suite.conclusion == 'success' }}
