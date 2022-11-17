@@ -1,28 +1,16 @@
 name: Merge bot PR after CI
-on:
-  check_suite:
-    type:
-      - 'completed'
+on: pull_request
 
 permissions:
   contents: write
   pull-requests: write
-  checks: write
+  # checks: read # For private repositories
   # actions: read # For private repositories
 
 jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          echo '1' $GITHUB_REF
-          echo '2' ${{ github.ref }}
-          echo '3' ${{ startsWith(github.ref, 'refs/pull/') }}
-          echo '4' ${{ github.actor }}
-          echo '5' ${{ github.base_ref }}
   dependabot:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'dependabot[bot]' && github.event.check_suite.conclusion == 'success' }}
+    if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
       - name: Dependabot metadata
         id: metadata
@@ -31,6 +19,12 @@ jobs:
         with:
           github-token: '${{ secrets.GITHUB_TOKEN }}'
       - uses: actions/checkout@v3
+      - name: Wait other jobs
+        if: ${{steps.metadata.outputs.update-type != 'version-update:semver-major'}}
+        uses: kachick/wait-other-jobs@v1
+        timeout-minutes: 10
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Approve and merge
         if: ${{steps.metadata.outputs.update-type != 'version-update:semver-major'}}
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --squash "$PR_URL"
@@ -47,9 +41,14 @@ jobs:
   #   Changing in all personal repository is annoy task for me. Even if using terrafform, getting mandatory CI names in each repo is too annoy!
   renovate:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.ref, 'refs/pull/') && github.actor == 'renovate[bot]' && github.event.check_suite.conclusion == 'success' }}
+    if: ${{ github.actor == 'renovate[bot]' }}
     steps:
       - uses: actions/checkout@v3
+      - name: Wait other jobs
+        uses: kachick/wait-other-jobs@v1
+        timeout-minutes: 10
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
       - name: Approve and merge
         run: gh pr review --approve "$PR_URL" && gh pr merge --auto --squash "$PR_URL"
         env:
